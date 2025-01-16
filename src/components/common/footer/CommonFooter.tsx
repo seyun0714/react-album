@@ -2,7 +2,7 @@ import styles from "./CommonFooter.module.scss";
 
 function CommonFooter() {
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <div className={styles.pagination}>
         <button className={styles.pagination__button}>
           <img src="/src/assets/icons/icon-arrowLeft.svg" alt="" />
@@ -14,7 +14,7 @@ function CommonFooter() {
           {/* 변경될 UI 부분 */}
         </button>
       </div>
-    </div>
+    </footer>
   );
 }
 
