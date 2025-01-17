@@ -45,14 +45,28 @@
     cursor: pointer;
 
     &:hover {
-      background-color: main.$color-gray-100;
+      background-color: main.$color-gray-300;
       border-radius: 4px;
 
       color: main.$color-black-900;
     }
 
-    &:active {
-      background-color: main.$color-gray-100;
+    &.active {
+      background-color: main.$color-gray-300;
+      border-radius: 4px;
+
+      color: main.$color-black-900;
+    }
+
+    &.inactive {
+      background-color: main.$color-white-000;
+      border-radius: 4px;
+
+      color: main.$color-black-900;
+    }
+
+    &.inactive:hover {
+      background-color: main.$color-gray-300;
       border-radius: 4px;
 
       color: main.$color-black-900;

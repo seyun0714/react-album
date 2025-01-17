@@ -18,8 +18,6 @@ function index() {
   const [imgData, setImgData] = useState<CardDTO>();
   const [open, setOpen] = useState<boolean>(false); // 이미지 상세 다이얼로그 발생(관리)
 
-  console.log(imgSelector);
-
   const CARD_LIST = useMemo(() => {
     if (imgSelector.state === "hasValue") {
       const result = imgSelector.contents.data.results.map((card: CardDTO) => {
