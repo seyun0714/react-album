@@ -7,20 +7,30 @@ import DetailDialog from "@/components/common/dialog/DetailDialog";
 
 import { CardDTO } from "./types/card";
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValueLoadable } from "recoil";
 import { imageData } from "@/recoil/selectors/imageSelectors";
 
 // CSS
 import styles from "./styles/index.module.scss";
 
 function index() {
-  const imgSelector = useRecoilValue(imageData);
-  const [imgData, setImgData] = useState<CardDTO[]>([]);
+  const imgSelector = useRecoilValueLoadable(imageData);
+  const [imgData, setImgData] = useState<CardDTO>();
   const [open, setOpen] = useState<boolean>(false); // 이미지 상세 다이얼로그 발생(관리)
 
-  const CARD_LIST = imgSelector.data.results.map((card: CardDTO) => {
-    return <Card data={card} key={card.id} handleDialog={setOpen} />;
-  });
+  const CARD_LIST =
+    imgSelector.state === "hasValue"
+      ? imgSelector.contents.data.results.map((card: CardDTO) => {
+          return (
+            <Card
+              data={card}
+              key={card.id}
+              handleDialog={setOpen}
+              handleSetData={setImgData}
+            />
+          );
+        })
+      : null;
 
   return (
     <div className={styles.page}>
@@ -44,7 +54,7 @@ function index() {
       </div>
       {/* 공통 푸터 UI 부분 */}
       <CommonFooter />
-      {open && <DetailDialog />}
+      {open && <DetailDialog data={imgData} handleDialog={setOpen} />}
     </div>
   );
 }
