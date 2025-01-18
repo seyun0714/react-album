@@ -102,8 +102,9 @@
       height: calc(100% - 220px); // header 70px / footer 150px
 
       .image {
+        max-width: inherit;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
     &__footer {

@@ -17,11 +17,20 @@ function DetailDialog({ data, handleDialog }: Props) {
     JSON.parse(localStorage.getItem("bookmark") || "[]")
   );
 
-  // 다이얼로그 열 때 북마크 체크크
+  // 다이얼로그 열 때 북마크 체크
   useEffect(() => {
     const isStored = storedValue.findIndex((item) => item.id === data.id) > -1;
     setBookmark(isStored);
-  }, [data]);
+
+    const escKeyDownCloseDialog = (event: any) => {
+      console.log("함수 호출");
+      if (event.key === "Escape") {
+        closeDialog();
+      }
+    };
+    window.addEventListener("keydown", escKeyDownCloseDialog);
+    return () => window.removeEventListener("keydown", escKeyDownCloseDialog);
+  });
 
   // 다이얼로그 끄기
   const closeDialog = () => {

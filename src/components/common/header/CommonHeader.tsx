@@ -3,13 +3,20 @@ import styles from "./CommonHeader.module.scss";
 
 function CommonHeader() {
   const navigate = useNavigate();
-  const moveToPage = () => {
-    navigate("/bookmark");
+  const moveToPage = (filter: string) => {
+    if (filter === "main") {
+      navigate("/");
+    } else if (filter === "bookmark") {
+      navigate("/bookmark");
+    }
   };
 
   return (
     <header className={styles.header}>
-      <div className={styles.header__logoBox}>
+      <div
+        className={styles.header__logoBox}
+        onClick={() => moveToPage("main")}
+      >
         <img
           src="src/assets/images/image-logo.png"
           className={styles.header__logoBox__logo}
@@ -20,7 +27,7 @@ function CommonHeader() {
         <button className={styles.header__profileBox__button}>사진제출</button>
         <button
           className={styles.header__profileBox__button}
-          onClick={moveToPage}
+          onClick={() => moveToPage("bookmark")}
         >
           북마크
         </button>
